@@ -4,26 +4,40 @@ declare -A Dictionary
 
 echo "Enter the times to toss the coin"
 read times
-Head=0
-Tail=0
+echo "Enter number of coins 1)Single 2)Double: "
+read coins
+
+function toss()
+{
 
 for (( index=0; index<$times; index++ ))
 do
-	random=$((RANDOM%2))
-	if [[ $random -eq 1 ]]
-	then
-		Head=$(($Head+1))
-	else
-		Tail=$(($Tail+1))
-	fi
+	str=""
+	for (( index1=0; index1<$coins; index1++ ))
+	do	
+		random=$((RANDOM%2))
+		if [[ $random -eq 1 ]]
+		then
+			str=$str"H"
+		else
+			str=$str"T"
+		fi
+	done
+#echo "Coins: $str"
+Dictionary[$str]=$(( ${Dictionary[$str]} + 1 ))
 done
 
-Dictionary[Head]=$Head
-Dictionary[Tail]=$Tail
+for keys in ${!Dictionary[@]}
+do
+	percentage=`expr "scale=2;( ${Dictionary[$keys]} / $times ) * 100" | bc -l`
+	echo $keys = $percentage
 
-echo ${Dictionary[@]}
+done
+
+}
+
+toss
+
 echo ${!Dictionary[@]}
-head=`expr "scale=3;( ${Dictionary[Head]} / $times ) * 100" | bc -l`
-echo $head
-tail=`expr "scale=3;( ${Dictionary[Tail]} / $times ) * 100" | bc -l`
-echo $tail
+echo ${Dictionary[@]}
+
