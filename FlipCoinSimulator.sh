@@ -1,10 +1,12 @@
+
 #!/bin/bash -x
 
 declare -A Dictionary
 
 echo "Enter the times to toss the coin"
 read times
-echo "Enter number of coins 1)Single 2)Double: "
+echo "Enter number of coins 1)Single 2)Double 3)Triple: "
+
 read coins
 
 function toss()
@@ -23,7 +25,7 @@ do
 			str=$str"T"
 		fi
 	done
-#echo "Coins: $str"
+
 Dictionary[$str]=$(( ${Dictionary[$str]} + 1 ))
 done
 
