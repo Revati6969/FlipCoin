@@ -10,7 +10,7 @@ echo "Enter the times to toss the coin"
 read times
 echo "Enter number of coins 1)Single 2)Double 3)Triple: "
 read coins
-
+#FLIP THE COIN AND STORE RESULT IN DICTIONARY
 function toss()
 {
 for (( index=0; index<$times; index++ ))
@@ -32,12 +32,12 @@ done
 toss
 
 echo "Dictionary in descending order"
-
+#SORT DICTIONARY IN DESCENDING ORDER
 for k in "${!Dictionary[@]}"
 do
    echo $k ' - ' ${Dictionary["$k"]}
 done | sort -rn -k3
-
+#WINNING COMBINATION
 for k in "${!Dictionary[@]}"
 do
    if [[ $max -lt ${Dictionary["$k"]} ]]
